@@ -4,7 +4,7 @@ import { Clock, CheckCircle, XCircle, Trophy } from "lucide-react";
 export default function MathQuiz() {
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [timeLeft, setTimeLeft] = useState(9);
+  const [timeLeft, setTimeLeft] = useState(15);
   const [totalQuestions, setTotalQuestions] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [showResult, setShowResult] = useState(false);
