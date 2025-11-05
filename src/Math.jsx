@@ -86,7 +86,7 @@ export default function MathQuiz() {
   const startGame = () => {
     setGameStarted(true);
     setCurrentQuestion(generateQuestion());
-    setTimeLeft(9);
+    setTimeLeft(15);
     setTotalQuestions(0);
     setCorrectAnswers(0);
     setShowResult(false);
@@ -120,7 +120,7 @@ export default function MathQuiz() {
     setTimeout(() => {
       setCurrentQuestion(generateQuestion());
       setSelectedAnswer(null);
-      setTimeLeft(9);
+      setTimeLeft(15);
       setShowResult(false);
     }, 1500);
   };
