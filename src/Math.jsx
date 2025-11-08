@@ -12,61 +12,115 @@ export default function MathQuiz() {
   const [gameStarted, setGameStarted] = useState(false);
 
   // Tất cả phép tính trong bảng trừ qua 10
-  const allQuestions = [
+  const allQuestionsWithAddition = [
+    // Phép Trừ Qua 10 (Giữ nguyên)
     // Cột 0: 10 - x
-    { num1: 10, num2: 1, ans: 9 },
-    { num1: 10, num2: 2, ans: 8 },
-    { num1: 10, num2: 3, ans: 7 },
-    { num1: 10, num2: 4, ans: 6 },
-    { num1: 10, num2: 5, ans: 5 },
-    { num1: 10, num2: 6, ans: 4 },
-    { num1: 10, num2: 7, ans: 3 },
-    { num1: 10, num2: 8, ans: 2 },
-    { num1: 10, num2: 9, ans: 1 },
+    { num1: 10, num2: 1, ans: 9, type: "subtraction" },
+    { num1: 10, num2: 2, ans: 8, type: "subtraction" },
+    { num1: 10, num2: 3, ans: 7, type: "subtraction" },
+    { num1: 10, num2: 4, ans: 6, type: "subtraction" },
+    { num1: 10, num2: 5, ans: 5, type: "subtraction" },
+    { num1: 10, num2: 6, ans: 4, type: "subtraction" },
+    { num1: 10, num2: 7, ans: 3, type: "subtraction" },
+    { num1: 10, num2: 8, ans: 2, type: "subtraction" },
+    { num1: 10, num2: 9, ans: 1, type: "subtraction" },
     // Cột 1: 11 - x
-    { num1: 11, num2: 2, ans: 9 },
-    { num1: 11, num2: 3, ans: 8 },
-    { num1: 11, num2: 4, ans: 7 },
-    { num1: 11, num2: 5, ans: 6 },
-    { num1: 11, num2: 6, ans: 5 },
-    { num1: 11, num2: 7, ans: 4 },
-    { num1: 11, num2: 8, ans: 3 },
-    { num1: 11, num2: 9, ans: 2 },
+    { num1: 11, num2: 2, ans: 9, type: "subtraction" },
+    { num1: 11, num2: 3, ans: 8, type: "subtraction" },
+    { num1: 11, num2: 4, ans: 7, type: "subtraction" },
+    { num1: 11, num2: 5, ans: 6, type: "subtraction" },
+    { num1: 11, num2: 6, ans: 5, type: "subtraction" },
+    { num1: 11, num2: 7, ans: 4, type: "subtraction" },
+    { num1: 11, num2: 8, ans: 3, type: "subtraction" },
+    { num1: 11, num2: 9, ans: 2, type: "subtraction" },
     // Cột 2: 12 - x
-    { num1: 12, num2: 3, ans: 9 },
-    { num1: 12, num2: 4, ans: 8 },
-    { num1: 12, num2: 5, ans: 7 },
-    { num1: 12, num2: 6, ans: 6 },
-    { num1: 12, num2: 7, ans: 5 },
-    { num1: 12, num2: 8, ans: 4 },
-    { num1: 12, num2: 9, ans: 3 },
+    { num1: 12, num2: 3, ans: 9, type: "subtraction" },
+    { num1: 12, num2: 4, ans: 8, type: "subtraction" },
+    { num1: 12, num2: 5, ans: 7, type: "subtraction" },
+    { num1: 12, num2: 6, ans: 6, type: "subtraction" },
+    { num1: 12, num2: 7, ans: 5, type: "subtraction" },
+    { num1: 12, num2: 8, ans: 4, type: "subtraction" },
+    { num1: 12, num2: 9, ans: 3, type: "subtraction" },
     // Cột 3: 13 - x
-    { num1: 13, num2: 4, ans: 9 },
-    { num1: 13, num2: 5, ans: 8 },
-    { num1: 13, num2: 6, ans: 7 },
-    { num1: 13, num2: 7, ans: 6 },
-    { num1: 13, num2: 8, ans: 5 },
-    { num1: 13, num2: 9, ans: 4 },
+    { num1: 13, num2: 4, ans: 9, type: "subtraction" },
+    { num1: 13, num2: 5, ans: 8, type: "subtraction" },
+    { num1: 13, num2: 6, ans: 7, type: "subtraction" },
+    { num1: 13, num2: 7, ans: 6, type: "subtraction" },
+    { num1: 13, num2: 8, ans: 5, type: "subtraction" },
+    { num1: 13, num2: 9, ans: 4, type: "subtraction" },
     // Cột 4: 14 - x
-    { num1: 14, num2: 5, ans: 9 },
-    { num1: 14, num2: 6, ans: 8 },
-    { num1: 14, num2: 7, ans: 7 },
-    { num1: 14, num2: 8, ans: 6 },
-    { num1: 14, num2: 9, ans: 5 },
+    { num1: 14, num2: 5, ans: 9, type: "subtraction" },
+    { num1: 14, num2: 6, ans: 8, type: "subtraction" },
+    { num1: 14, num2: 7, ans: 7, type: "subtraction" },
+    { num1: 14, num2: 8, ans: 6, type: "subtraction" },
+    { num1: 14, num2: 9, ans: 5, type: "subtraction" },
     // Cột 5: 15 - x
-    { num1: 15, num2: 6, ans: 9 },
-    { num1: 15, num2: 7, ans: 8 },
-    { num1: 15, num2: 8, ans: 7 },
-    { num1: 15, num2: 9, ans: 6 },
+    { num1: 15, num2: 6, ans: 9, type: "subtraction" },
+    { num1: 15, num2: 7, ans: 8, type: "subtraction" },
+    { num1: 15, num2: 8, ans: 7, type: "subtraction" },
+    { num1: 15, num2: 9, ans: 6, type: "subtraction" },
     // Cột 6: 16 - x
-    { num1: 16, num2: 7, ans: 9 },
-    { num1: 16, num2: 8, ans: 8 },
-    { num1: 16, num2: 9, ans: 7 },
+    { num1: 16, num2: 7, ans: 9, type: "subtraction" },
+    { num1: 16, num2: 8, ans: 8, type: "subtraction" },
+    { num1: 16, num2: 9, ans: 7, type: "subtraction" },
     // Cột 7: 17 - x
-    { num1: 17, num2: 8, ans: 9 },
-    { num1: 17, num2: 9, ans: 8 },
+    { num1: 17, num2: 8, ans: 9, type: "subtraction" },
+    { num1: 17, num2: 9, ans: 8, type: "subtraction" },
     // Cột 8: 18 - x
-    { num1: 18, num2: 9, ans: 9 },
+    { num1: 18, num2: 9, ans: 9, type: "subtraction" },
+
+    // Phép Cộng Qua 10 (Thêm vào từ hình ảnh)
+    // Tổng bằng 11
+    { num1: 9, num2: 2, ans: 11, type: "addition" },
+    { num1: 8, num2: 3, ans: 11, type: "addition" },
+    { num1: 7, num2: 4, ans: 11, type: "addition" },
+    { num1: 6, num2: 5, ans: 11, type: "addition" },
+    { num1: 5, num2: 6, ans: 11, type: "addition" },
+    { num1: 4, num2: 7, ans: 11, type: "addition" },
+    { num1: 3, num2: 8, ans: 11, type: "addition" },
+    { num1: 2, num2: 9, ans: 11, type: "addition" },
+
+    // Tổng bằng 12
+    { num1: 9, num2: 3, ans: 12, type: "addition" },
+    { num1: 8, num2: 4, ans: 12, type: "addition" },
+    { num1: 7, num2: 5, ans: 12, type: "addition" },
+    { num1: 6, num2: 6, ans: 12, type: "addition" },
+    { num1: 5, num2: 7, ans: 12, type: "addition" },
+    { num1: 4, num2: 8, ans: 12, type: "addition" },
+    { num1: 3, num2: 9, ans: 12, type: "addition" },
+
+    // Tổng bằng 13
+    { num1: 9, num2: 4, ans: 13, type: "addition" },
+    { num1: 8, num2: 5, ans: 13, type: "addition" },
+    { num1: 7, num2: 6, ans: 13, type: "addition" },
+    { num1: 6, num2: 7, ans: 13, type: "addition" },
+    { num1: 5, num2: 8, ans: 13, type: "addition" },
+    { num1: 4, num2: 9, ans: 13, type: "addition" },
+
+    // Tổng bằng 14
+    { num1: 9, num2: 5, ans: 14, type: "addition" },
+    { num1: 8, num2: 6, ans: 14, type: "addition" },
+    { num1: 7, num2: 7, ans: 14, type: "addition" },
+    { num1: 6, num2: 8, ans: 14, type: "addition" },
+    { num1: 5, num2: 9, ans: 14, type: "addition" },
+
+    // Tổng bằng 15
+    { num1: 9, num2: 6, ans: 15, type: "addition" },
+    { num1: 8, num2: 7, ans: 15, type: "addition" },
+    { num1: 7, num2: 8, ans: 15, type: "addition" },
+    { num1: 6, num2: 9, ans: 15, type: "addition" },
+
+    // Tổng bằng 16
+    { num1: 9, num2: 7, ans: 16, type: "addition" },
+    { num1: 8, num2: 8, ans: 16, type: "addition" },
+    { num1: 7, num2: 9, ans: 16, type: "addition" },
+
+    // Tổng bằng 17
+    { num1: 9, num2: 8, ans: 17, type: "addition" },
+    { num1: 8, num2: 9, ans: 17, type: "addition" },
+
+    // Tổng bằng 18
+    { num1: 9, num2: 9, ans: 18, type: "addition" },
   ];
 
   // Tạo câu hỏi ngẫu nhiên từ bảng
