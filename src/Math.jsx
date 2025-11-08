@@ -11,116 +11,109 @@ export default function MathQuiz() {
   const [isCorrect, setIsCorrect] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
 
-  // Tất cả phép tính trong bảng trừ qua 10
-  const allQuestionsWithAddition = [
-    // Phép Trừ Qua 10 (Giữ nguyên)
-    // Cột 0: 10 - x
-    { num1: 10, num2: 1, ans: 9, type: "subtraction" },
-    { num1: 10, num2: 2, ans: 8, type: "subtraction" },
-    { num1: 10, num2: 3, ans: 7, type: "subtraction" },
-    { num1: 10, num2: 4, ans: 6, type: "subtraction" },
-    { num1: 10, num2: 5, ans: 5, type: "subtraction" },
-    { num1: 10, num2: 6, ans: 4, type: "subtraction" },
-    { num1: 10, num2: 7, ans: 3, type: "subtraction" },
-    { num1: 10, num2: 8, ans: 2, type: "subtraction" },
-    { num1: 10, num2: 9, ans: 1, type: "subtraction" },
-    // Cột 1: 11 - x
-    { num1: 11, num2: 2, ans: 9, type: "subtraction" },
-    { num1: 11, num2: 3, ans: 8, type: "subtraction" },
-    { num1: 11, num2: 4, ans: 7, type: "subtraction" },
-    { num1: 11, num2: 5, ans: 6, type: "subtraction" },
-    { num1: 11, num2: 6, ans: 5, type: "subtraction" },
-    { num1: 11, num2: 7, ans: 4, type: "subtraction" },
-    { num1: 11, num2: 8, ans: 3, type: "subtraction" },
-    { num1: 11, num2: 9, ans: 2, type: "subtraction" },
-    // Cột 2: 12 - x
-    { num1: 12, num2: 3, ans: 9, type: "subtraction" },
-    { num1: 12, num2: 4, ans: 8, type: "subtraction" },
-    { num1: 12, num2: 5, ans: 7, type: "subtraction" },
-    { num1: 12, num2: 6, ans: 6, type: "subtraction" },
-    { num1: 12, num2: 7, ans: 5, type: "subtraction" },
-    { num1: 12, num2: 8, ans: 4, type: "subtraction" },
-    { num1: 12, num2: 9, ans: 3, type: "subtraction" },
-    // Cột 3: 13 - x
-    { num1: 13, num2: 4, ans: 9, type: "subtraction" },
-    { num1: 13, num2: 5, ans: 8, type: "subtraction" },
-    { num1: 13, num2: 6, ans: 7, type: "subtraction" },
-    { num1: 13, num2: 7, ans: 6, type: "subtraction" },
-    { num1: 13, num2: 8, ans: 5, type: "subtraction" },
-    { num1: 13, num2: 9, ans: 4, type: "subtraction" },
-    // Cột 4: 14 - x
-    { num1: 14, num2: 5, ans: 9, type: "subtraction" },
-    { num1: 14, num2: 6, ans: 8, type: "subtraction" },
-    { num1: 14, num2: 7, ans: 7, type: "subtraction" },
-    { num1: 14, num2: 8, ans: 6, type: "subtraction" },
-    { num1: 14, num2: 9, ans: 5, type: "subtraction" },
-    // Cột 5: 15 - x
-    { num1: 15, num2: 6, ans: 9, type: "subtraction" },
-    { num1: 15, num2: 7, ans: 8, type: "subtraction" },
-    { num1: 15, num2: 8, ans: 7, type: "subtraction" },
-    { num1: 15, num2: 9, ans: 6, type: "subtraction" },
-    // Cột 6: 16 - x
-    { num1: 16, num2: 7, ans: 9, type: "subtraction" },
-    { num1: 16, num2: 8, ans: 8, type: "subtraction" },
-    { num1: 16, num2: 9, ans: 7, type: "subtraction" },
-    // Cột 7: 17 - x
-    { num1: 17, num2: 8, ans: 9, type: "subtraction" },
-    { num1: 17, num2: 9, ans: 8, type: "subtraction" },
-    // Cột 8: 18 - x
-    { num1: 18, num2: 9, ans: 9, type: "subtraction" },
+  // Tất cả phép tính: Cộng qua 10 và Trừ qua 10
+  const allQuestions = [
+    // PHÉP CỘNG QUA 10
+    // 9 + x
+    { num1: 9, num2: 2, ans: 11, operator: "+" },
+    { num1: 9, num2: 3, ans: 12, operator: "+" },
+    { num1: 9, num2: 4, ans: 13, operator: "+" },
+    { num1: 9, num2: 5, ans: 14, operator: "+" },
+    { num1: 9, num2: 6, ans: 15, operator: "+" },
+    { num1: 9, num2: 7, ans: 16, operator: "+" },
+    { num1: 9, num2: 8, ans: 17, operator: "+" },
+    { num1: 9, num2: 9, ans: 18, operator: "+" },
+    // 8 + x
+    { num1: 8, num2: 3, ans: 11, operator: "+" },
+    { num1: 8, num2: 4, ans: 12, operator: "+" },
+    { num1: 8, num2: 5, ans: 13, operator: "+" },
+    { num1: 8, num2: 6, ans: 14, operator: "+" },
+    { num1: 8, num2: 7, ans: 15, operator: "+" },
+    { num1: 8, num2: 8, ans: 16, operator: "+" },
+    { num1: 8, num2: 9, ans: 17, operator: "+" },
+    // 7 + x
+    { num1: 7, num2: 4, ans: 11, operator: "+" },
+    { num1: 7, num2: 5, ans: 12, operator: "+" },
+    { num1: 7, num2: 6, ans: 13, operator: "+" },
+    { num1: 7, num2: 7, ans: 14, operator: "+" },
+    { num1: 7, num2: 8, ans: 15, operator: "+" },
+    { num1: 7, num2: 9, ans: 16, operator: "+" },
+    // 6 + x
+    { num1: 6, num2: 5, ans: 11, operator: "+" },
+    { num1: 6, num2: 6, ans: 12, operator: "+" },
+    { num1: 6, num2: 7, ans: 13, operator: "+" },
+    { num1: 6, num2: 8, ans: 14, operator: "+" },
+    { num1: 6, num2: 9, ans: 15, operator: "+" },
+    // 5 + x
+    { num1: 5, num2: 6, ans: 11, operator: "+" },
+    { num1: 5, num2: 7, ans: 12, operator: "+" },
+    { num1: 5, num2: 8, ans: 13, operator: "+" },
+    { num1: 5, num2: 9, ans: 14, operator: "+" },
+    // 4 + x
+    { num1: 4, num2: 7, ans: 11, operator: "+" },
+    { num1: 4, num2: 8, ans: 12, operator: "+" },
+    { num1: 4, num2: 9, ans: 13, operator: "+" },
+    // 3 + x
+    { num1: 3, num2: 8, ans: 11, operator: "+" },
+    { num1: 3, num2: 9, ans: 12, operator: "+" },
+    // 2 + x
+    { num1: 2, num2: 9, ans: 11, operator: "+" },
 
-    // Phép Cộng Qua 10 (Thêm vào từ hình ảnh)
-    // Tổng bằng 11
-    { num1: 9, num2: 2, ans: 11, type: "addition" },
-    { num1: 8, num2: 3, ans: 11, type: "addition" },
-    { num1: 7, num2: 4, ans: 11, type: "addition" },
-    { num1: 6, num2: 5, ans: 11, type: "addition" },
-    { num1: 5, num2: 6, ans: 11, type: "addition" },
-    { num1: 4, num2: 7, ans: 11, type: "addition" },
-    { num1: 3, num2: 8, ans: 11, type: "addition" },
-    { num1: 2, num2: 9, ans: 11, type: "addition" },
-
-    // Tổng bằng 12
-    { num1: 9, num2: 3, ans: 12, type: "addition" },
-    { num1: 8, num2: 4, ans: 12, type: "addition" },
-    { num1: 7, num2: 5, ans: 12, type: "addition" },
-    { num1: 6, num2: 6, ans: 12, type: "addition" },
-    { num1: 5, num2: 7, ans: 12, type: "addition" },
-    { num1: 4, num2: 8, ans: 12, type: "addition" },
-    { num1: 3, num2: 9, ans: 12, type: "addition" },
-
-    // Tổng bằng 13
-    { num1: 9, num2: 4, ans: 13, type: "addition" },
-    { num1: 8, num2: 5, ans: 13, type: "addition" },
-    { num1: 7, num2: 6, ans: 13, type: "addition" },
-    { num1: 6, num2: 7, ans: 13, type: "addition" },
-    { num1: 5, num2: 8, ans: 13, type: "addition" },
-    { num1: 4, num2: 9, ans: 13, type: "addition" },
-
-    // Tổng bằng 14
-    { num1: 9, num2: 5, ans: 14, type: "addition" },
-    { num1: 8, num2: 6, ans: 14, type: "addition" },
-    { num1: 7, num2: 7, ans: 14, type: "addition" },
-    { num1: 6, num2: 8, ans: 14, type: "addition" },
-    { num1: 5, num2: 9, ans: 14, type: "addition" },
-
-    // Tổng bằng 15
-    { num1: 9, num2: 6, ans: 15, type: "addition" },
-    { num1: 8, num2: 7, ans: 15, type: "addition" },
-    { num1: 7, num2: 8, ans: 15, type: "addition" },
-    { num1: 6, num2: 9, ans: 15, type: "addition" },
-
-    // Tổng bằng 16
-    { num1: 9, num2: 7, ans: 16, type: "addition" },
-    { num1: 8, num2: 8, ans: 16, type: "addition" },
-    { num1: 7, num2: 9, ans: 16, type: "addition" },
-
-    // Tổng bằng 17
-    { num1: 9, num2: 8, ans: 17, type: "addition" },
-    { num1: 8, num2: 9, ans: 17, type: "addition" },
-
-    // Tổng bằng 18
-    { num1: 9, num2: 9, ans: 18, type: "addition" },
+    // PHÉP TRỪ QUA 10
+    // 10 - x
+    { num1: 10, num2: 1, ans: 9, operator: "-" },
+    { num1: 10, num2: 2, ans: 8, operator: "-" },
+    { num1: 10, num2: 3, ans: 7, operator: "-" },
+    { num1: 10, num2: 4, ans: 6, operator: "-" },
+    { num1: 10, num2: 5, ans: 5, operator: "-" },
+    { num1: 10, num2: 6, ans: 4, operator: "-" },
+    { num1: 10, num2: 7, ans: 3, operator: "-" },
+    { num1: 10, num2: 8, ans: 2, operator: "-" },
+    { num1: 10, num2: 9, ans: 1, operator: "-" },
+    // 11 - x
+    { num1: 11, num2: 2, ans: 9, operator: "-" },
+    { num1: 11, num2: 3, ans: 8, operator: "-" },
+    { num1: 11, num2: 4, ans: 7, operator: "-" },
+    { num1: 11, num2: 5, ans: 6, operator: "-" },
+    { num1: 11, num2: 6, ans: 5, operator: "-" },
+    { num1: 11, num2: 7, ans: 4, operator: "-" },
+    { num1: 11, num2: 8, ans: 3, operator: "-" },
+    { num1: 11, num2: 9, ans: 2, operator: "-" },
+    // 12 - x
+    { num1: 12, num2: 3, ans: 9, operator: "-" },
+    { num1: 12, num2: 4, ans: 8, operator: "-" },
+    { num1: 12, num2: 5, ans: 7, operator: "-" },
+    { num1: 12, num2: 6, ans: 6, operator: "-" },
+    { num1: 12, num2: 7, ans: 5, operator: "-" },
+    { num1: 12, num2: 8, ans: 4, operator: "-" },
+    { num1: 12, num2: 9, ans: 3, operator: "-" },
+    // 13 - x
+    { num1: 13, num2: 4, ans: 9, operator: "-" },
+    { num1: 13, num2: 5, ans: 8, operator: "-" },
+    { num1: 13, num2: 6, ans: 7, operator: "-" },
+    { num1: 13, num2: 7, ans: 6, operator: "-" },
+    { num1: 13, num2: 8, ans: 5, operator: "-" },
+    { num1: 13, num2: 9, ans: 4, operator: "-" },
+    // 14 - x
+    { num1: 14, num2: 5, ans: 9, operator: "-" },
+    { num1: 14, num2: 6, ans: 8, operator: "-" },
+    { num1: 14, num2: 7, ans: 7, operator: "-" },
+    { num1: 14, num2: 8, ans: 6, operator: "-" },
+    { num1: 14, num2: 9, ans: 5, operator: "-" },
+    // 15 - x
+    { num1: 15, num2: 6, ans: 9, operator: "-" },
+    { num1: 15, num2: 7, ans: 8, operator: "-" },
+    { num1: 15, num2: 8, ans: 7, operator: "-" },
+    { num1: 15, num2: 9, ans: 6, operator: "-" },
+    // 16 - x
+    { num1: 16, num2: 7, ans: 9, operator: "-" },
+    { num1: 16, num2: 8, ans: 8, operator: "-" },
+    { num1: 16, num2: 9, ans: 7, operator: "-" },
+    // 17 - x
+    { num1: 17, num2: 8, ans: 9, operator: "-" },
+    { num1: 17, num2: 9, ans: 8, operator: "-" },
+    // 18 - x
+    { num1: 18, num2: 9, ans: 9, operator: "-" },
   ];
 
   // Tạo câu hỏi ngẫu nhiên từ bảng
@@ -128,11 +121,22 @@ export default function MathQuiz() {
     const question =
       allQuestions[Math.floor(Math.random() * allQuestions.length)];
 
+    // Tạo danh sách đáp án dựa vào loại phép tính
+    let options;
+    if (question.operator === "+") {
+      // Phép cộng: đáp án từ 11-18
+      options = [11, 12, 13, 14, 15, 16, 17, 18];
+    } else {
+      // Phép trừ: đáp án từ 1-9
+      options = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    }
+
     return {
       num1: question.num1,
       num2: question.num2,
+      operator: question.operator,
       correctAnswer: question.ans,
-      options: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      options: options,
     };
   };
 
@@ -187,12 +191,12 @@ export default function MathQuiz() {
             <div className="text-6xl mb-4">🦉</div>
             <h1 className="text-4xl font-bold text-pink-600 mb-2">Luyện Tập</h1>
             <h2 className="text-3xl font-bold text-purple-600">
-              Phép Trừ Qua 10
+              Cộng Trừ Qua 10
             </h2>
           </div>
           <div className="bg-yellow-50 rounded-2xl p-6 mb-6">
             <p className="text-lg text-gray-700 mb-2">
-              📝 Mỗi câu hỏi có 9 giây
+              📝 Mỗi câu hỏi có 15 giây
             </p>
             <p className="text-lg text-gray-700 mb-2">🎯 Chọn đáp án đúng</p>
             <p className="text-lg text-gray-700">
@@ -251,7 +255,8 @@ export default function MathQuiz() {
           <>
             <div className="bg-gradient-to-r from-pink-100 to-purple-100 rounded-3xl p-8 mb-6 text-center">
               <div className="text-6xl font-bold text-purple-700 mb-2">
-                {currentQuestion.num1} - {currentQuestion.num2} = ?
+                {currentQuestion.num1} {currentQuestion.operator}{" "}
+                {currentQuestion.num2} = ?
               </div>
             </div>
 
@@ -289,13 +294,13 @@ export default function MathQuiz() {
             )}
 
             {/* Đáp án */}
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-4 gap-3">
               {currentQuestion.options.map((option, index) => (
                 <button
                   key={index}
                   onClick={() => !showResult && handleAnswer(option)}
                   disabled={showResult}
-                  className={`text-3xl font-bold py-6 rounded-2xl transition-all transform hover:scale-105 ${
+                  className={`text-2xl font-bold py-4 rounded-2xl transition-all transform hover:scale-105 ${
                     showResult && option === currentQuestion.correctAnswer
                       ? "bg-green-500 text-white"
                       : showResult && option === selectedAnswer
