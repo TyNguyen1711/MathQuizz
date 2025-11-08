@@ -4,7 +4,7 @@ import { Clock, CheckCircle, XCircle, Trophy } from "lucide-react";
 export default function MathQuiz() {
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [timeLeft, setTimeLeft] = useState(15);
+  const [timeLeft, setTimeLeft] = useState(10);
   const [totalQuestions, setTotalQuestions] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [showResult, setShowResult] = useState(false);
@@ -144,7 +144,7 @@ export default function MathQuiz() {
   const startGame = () => {
     setGameStarted(true);
     setCurrentQuestion(generateQuestion());
-    setTimeLeft(15);
+    setTimeLeft(10);
     setTotalQuestions(0);
     setCorrectAnswers(0);
     setShowResult(false);
@@ -178,7 +178,7 @@ export default function MathQuiz() {
     setTimeout(() => {
       setCurrentQuestion(generateQuestion());
       setSelectedAnswer(null);
-      setTimeLeft(15);
+      setTimeLeft(10);
       setShowResult(false);
     }, 1500);
   };
