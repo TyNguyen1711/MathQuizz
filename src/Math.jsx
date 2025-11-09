@@ -10,6 +10,7 @@ export default function MathQuiz() {
   const [showResult, setShowResult] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
+  const [shuffledQuestions, setShuffledQuestions] = useState([]);
 
   // Tất cả phép tính: Cộng qua 10 và Trừ qua 10
   const allQuestions = [
@@ -116,10 +117,24 @@ export default function MathQuiz() {
     { num1: 18, num2: 9, ans: 9, operator: "-" },
   ];
 
+  // Hàm xáo trộn mảng (Fisher-Yates shuffle)
+  const shuffleArray = (array) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
   // Tạo câu hỏi ngẫu nhiên từ bảng
   const generateQuestion = () => {
     const question =
-      allQuestions[Math.floor(Math.random() * allQuestions.length)];
+      shuffledQuestions.length > 0
+        ? shuffledQuestions[
+            Math.floor(Math.random() * shuffledQuestions.length)
+          ]
+        : allQuestions[Math.floor(Math.random() * allQuestions.length)];
 
     // Tạo danh sách đáp án dựa vào loại phép tính
     let options;
@@ -143,6 +158,8 @@ export default function MathQuiz() {
   // Bắt đầu game
   const startGame = () => {
     setGameStarted(true);
+    const shuffled = shuffleArray(allQuestions);
+    setShuffledQuestions(shuffled);
     setCurrentQuestion(generateQuestion());
     setTimeLeft(10);
     setTotalQuestions(0);
@@ -196,7 +213,7 @@ export default function MathQuiz() {
           </div>
           <div className="bg-yellow-50 rounded-2xl p-6 mb-6">
             <p className="text-lg text-gray-700 mb-2">
-              📝 Mỗi câu hỏi có 15 giây
+              📝 Mỗi câu hỏi có 10 giây
             </p>
             <p className="text-lg text-gray-700 mb-2">🎯 Chọn đáp án đúng</p>
             <p className="text-lg text-gray-700">
