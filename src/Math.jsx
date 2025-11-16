@@ -355,7 +355,7 @@ import { useState, useEffect } from "react";
 import { Clock, CheckCircle, XCircle, Trophy, Pause, Play } from "lucide-react";
 
 // ===== CẤU HÌNH THỜI GIAN =====
-const THINKING_TIME = 35; // Thời gian suy nghĩ cho mỗi câu (giây)
+const THINKING_TIME = 40; // Thời gian suy nghĩ cho mỗi câu (giây)
 
 export default function MathQuiz() {
   const [currentQuestion, setCurrentQuestion] = useState(null);
