@@ -369,38 +369,54 @@ export default function MathQuiz() {
   const [isPaused, setIsPaused] = useState(false);
 
   // Tạo phép tính cộng/trừ ngẫu nhiên trong khoảng 0-99
+  // Tạo phép tính cộng/trừ ngẫu nhiên
   const generateQuestion = () => {
     const operator = Math.random() > 0.5 ? "+" : "-";
     let num1, num2, correctAnswer;
 
     if (operator === "+") {
-      // Phép cộng: đảm bảo kết quả <= 99
-      num1 = Math.floor(Math.random() * 90); // 0-89
-      num2 = Math.floor(Math.random() * (99 - num1 + 1)); // Đảm bảo num1 + num2 <= 99
+      // Phép cộng: số hạng từ 0-99, kết quả < 200
+      num1 = Math.floor(Math.random() * 100); // 0-99
+      num2 = Math.floor(Math.random() * 100); // 0-99
       correctAnswer = num1 + num2;
     } else {
-      // Phép trừ: đảm bảo kết quả >= 0
+      // Phép trừ: đảm bảo kết quả >= 0 (phù hợp lớp 2)
       num1 = Math.floor(Math.random() * 100); // 0-99
-      num2 = Math.floor(Math.random() * (num1 + 1)); // 0 đến num1
+      num2 = Math.floor(Math.random() * (num1 + 1)); // 0 đến num1 để kết quả >= 0
       correctAnswer = num1 - num2;
     }
 
-    // Tạo 5 đáp án sai ngẫu nhiên
+    // Tạo 5 đáp án sai dễ nhầm (chênh lệch 1, 10, hoặc nhầm hàng chục/đơn vị)
     const wrongAnswers = new Set();
+    const strategies = [
+      () => correctAnswer + 1, // Sai 1 đơn vị
+      () => correctAnswer - 1, // Sai 1 đơn vị
+      () => correctAnswer + 10, // Sai 1 chục
+      () => correctAnswer - 10, // Sai 1 chục
+      () => correctAnswer + 11, // Nhầm cả chục và đơn vị
+      () => correctAnswer - 11, // Nhầm cả chục và đơn vị
+      () => correctAnswer + 9, // Sai 9 đơn vị
+      () => correctAnswer - 9, // Sai 9 đơn vị
+    ];
+
+    let attempts = 0;
+    while (wrongAnswers.size < 5 && attempts < 100) {
+      const strategy =
+        strategies[Math.floor(Math.random() * strategies.length)];
+      const wrong = strategy();
+
+      // Chỉ chấp nhận đáp án >= 0 và < 300 (phù hợp lớp 2)
+      if (wrong !== correctAnswer && wrong >= 0 && wrong < 300) {
+        wrongAnswers.add(wrong);
+      }
+      attempts++;
+    }
+
+    // Nếu chưa đủ 5 đáp án sai, thêm ngẫu nhiên
     while (wrongAnswers.size < 5) {
-      let wrong;
-      if (operator === "+") {
-        // Đáp án sai cho phép cộng: trong khoảng hợp lý
-        wrong = correctAnswer + Math.floor(Math.random() * 21) - 10; // +/- 10
-        if (wrong >= 0 && wrong <= 99 && wrong !== correctAnswer) {
-          wrongAnswers.add(wrong);
-        }
-      } else {
-        // Đáp án sai cho phép trừ: trong khoảng hợp lý
-        wrong = correctAnswer + Math.floor(Math.random() * 21) - 10; // +/- 10
-        if (wrong >= 0 && wrong <= 99 && wrong !== correctAnswer) {
-          wrongAnswers.add(wrong);
-        }
+      const wrong = correctAnswer + Math.floor(Math.random() * 21) - 10;
+      if (wrong !== correctAnswer && wrong >= 0) {
+        wrongAnswers.add(wrong);
       }
     }
 
@@ -419,7 +435,6 @@ export default function MathQuiz() {
       options,
     };
   };
-
   // Bắt đầu game
   const startGame = () => {
     setGameStarted(true);
