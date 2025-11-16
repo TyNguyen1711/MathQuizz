@@ -533,16 +533,7 @@ export default function MathQuiz() {
               {correctAnswers}
             </p>
           </div>
-          <button
-            onClick={togglePause}
-            className="bg-purple-100 hover:bg-purple-200 rounded-2xl px-4 py-2 transition-colors"
-          >
-            {isPaused ? (
-              <Play className="text-purple-600" size={24} />
-            ) : (
-              <Pause className="text-purple-600" size={24} />
-            )}
-          </button>
+
           <div
             className={`rounded-2xl px-4 py-2 ${
               timeLeft <= 3 ? "bg-red-100" : "bg-orange-100"
